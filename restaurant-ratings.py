@@ -1,4 +1,5 @@
 import sys
+import random
 
 
 def make_restaurant_dict(filename):
@@ -27,6 +28,8 @@ def get_rating(filename):
     while True:
         print "Enter 'view' to see all ratings."
         print "Enter 'add' to add rating."
+        print "Enter 'update random' to update a random restaurant rating."
+        print "Enter 'update restaurant' to update a specific restaurant rating."
         print "Enter 'quit' to exit."
 
         user_choice = raw_input("> ")
@@ -45,9 +48,21 @@ def get_rating(filename):
             # Adding user input to dictionary
             restaurant_ratings[user_restaurant] = user_rating
 
+        elif user_choice == 'update random':
+            random_restaurant = random.choice(restaurant_ratings.keys())
+            print "{} has a rating of {}.".format(
+                random_restaurant, restaurant_ratings[random_restaurant])
+
+            new_rating = raw_input("What should the new rating be? ")
+            restaurant_ratings[random_restaurant] = new_rating
+
+        elif user_choice == 'update restaurant':
+            user_restaurant = raw_input("Which restaurant would you like to update?")
+            user_rating = raw_input("What rating would you like to give the restaurant?")
+
+            restaurant_ratings[user_restaurant] = user_rating
+
         else:
             break
-
-    return restaurant_ratings
 
 get_rating(sys.argv[1])
