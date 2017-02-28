@@ -17,9 +17,28 @@ def print_ratings(filename):
         rating = restaurant_data[1]
         restaurant_ratings[restaurant] = rating
 
+    return restaurant_ratings
+
+
+def get_rating(filename):
+    """prompt user for input
+    add input to current dictionary
+    print the whole dictionary as nice print statements
+    """
+
+    restaurant_ratings = print_ratings(filename)
+
+    user_restaurant = raw_input("Please enter a restaurant name: ")
+    user_rating = raw_input("Please enter this restaurant's rating: ")
+
+    restaurant_ratings[user_restaurant] = user_rating
+
+    sorted_restaurants = sorted(restaurant_ratings.items())
+
     # Prints and rating in a readable format.
-    for restaurant, rating in restaurant_ratings.items():
+    for restaurant, rating in sorted_restaurants:
         print "{} is rated at {}.".format(restaurant, rating)
 
+    return restaurant_ratings
 
-print_ratings(sys.argv[1])
+get_rating(sys.argv[1])
