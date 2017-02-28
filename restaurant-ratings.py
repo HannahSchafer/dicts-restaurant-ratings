@@ -1,7 +1,7 @@
 import sys
 
 
-def print_ratings(filename):
+def make_restaurant_dict(filename):
     """Prints restaurant ratings.
     """
 
@@ -26,7 +26,7 @@ def get_rating(filename):
     print the whole dictionary as nice print statements
     """
 
-    restaurant_ratings = print_ratings(filename)
+    restaurant_ratings = make_restaurant_dict(filename)
 
     user_restaurant = raw_input("Please enter a restaurant name: ")
     user_rating = raw_input("Please enter this restaurant's rating: ")
