@@ -2,7 +2,7 @@ import sys
 
 
 def make_restaurant_dict(filename):
-    """Prints restaurant ratings.
+    """Creates restaurant:rating dictionary.
     """
 
     text = open(filename)
@@ -11,33 +11,42 @@ def make_restaurant_dict(filename):
     # Iterates through text, splits lines into restaurant and rating.
     # Adds the data to the restaurant_ratings dictionary.
     for line in text:
-        line = line.rstrip()
-        restaurant_data = line.split(":")
-        restaurant = restaurant_data[0]
-        rating = restaurant_data[1]
+        restaurant, rating = line.rstrip().split(":")
         restaurant_ratings[restaurant] = rating
 
     return restaurant_ratings
 
 
 def get_rating(filename):
-    """prompt user for input
-    add input to current dictionary
-    print the whole dictionary as nice print statements
+    """Adds restaurant rating to the dictionary from user input
+    and prints all restaurants and ratings in a nice format.
     """
-
+    # Creates dictionary from file
     restaurant_ratings = make_restaurant_dict(filename)
 
-    user_restaurant = raw_input("Please enter a restaurant name: ")
-    user_rating = raw_input("Please enter this restaurant's rating: ")
+    while True:
+        print "Enter 'view' to see all ratings."
+        print "Enter 'add' to add rating."
+        print "Enter 'quit' to exit."
 
-    restaurant_ratings[user_restaurant] = user_rating
+        user_choice = raw_input("> ")
+        if user_choice == 'view':
 
-    sorted_restaurants = sorted(restaurant_ratings.items())
+            sorted_restaurants = sorted(restaurant_ratings.items())
 
-    # Prints and rating in a readable format.
-    for restaurant, rating in sorted_restaurants:
-        print "{} is rated at {}.".format(restaurant, rating)
+            # Prints and rating in a readable format.
+            for restaurant, rating in sorted_restaurants:
+                print "{} is rated at {}.".format(restaurant, rating)
+
+        elif user_choice == 'add':
+
+            user_restaurant = raw_input("Please enter a restaurant name: ")
+            user_rating = raw_input("Please enter this restaurant's rating: ")
+            # Adding user input to dictionary
+            restaurant_ratings[user_restaurant] = user_rating
+
+        else:
+            break
 
     return restaurant_ratings
 
